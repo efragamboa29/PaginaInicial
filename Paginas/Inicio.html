@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="../css/estilos.css">
-
+<script src="../scripts/autenticarUsuario.js"></script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,10 +20,13 @@
     <input type="submit" value="Acceder">
 
     <a href="registro.html">Registro</a>
+    <br>
+    <label id="MensajeError" class="texto-rojo"  style="display: none;" >Credenciales incorrectas, verifique su informacion</label>
+    <br>
 
 </form>
 
-<script>
+<script >
         document.getElementById("inicioForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent default form submission
 
@@ -32,13 +35,59 @@
         var password = document.getElementById("password").value;
 
         // You can perform further validation here if needed
+        ConsultarUsuario();
 
-        // Display submitted values
-        console.log("Nombre de usuario: " + username);
-        console.log("Contraseña: " + password);
 
         // Here you can send the data to your server for further processing, e.g., via AJAX
     });
+
+
+    function ConsultarUsuario()
+    {
+    var dataToSend = {
+    nombre: document.getElementById("username").value,
+    contrasena: document.getElementById("password").value
+    };
+    // URL de la API
+    var apiUrl = ulrparcial+'api/libreria/consultarUsuario';
+
+    var requestOptions = {
+        method: 'POST', // Método de la solicitud
+        headers: {
+            'Content-Type': 'application/json' // Tipo de contenido del cuerpo de la solicitud
+        },
+        body: JSON.stringify(dataToSend) // Convertir el objeto a formato JSON y enviarlo en el cuerpo de la solicitud
+    };
+
+    // Hacer la solicitud GET utilizando fetch()
+    fetch(apiUrl, requestOptions,{mode:'cors'})
+    .then(response => {
+        // Verificar si la respuesta está en el rango de 200 a 299 (éxito)
+        if (response.ok) {
+        // Convertir la respuesta a formato JSON
+        return response.json();
+        }
+        // En caso de error, lanzar una excepción
+        throw new Error('Error en la solicitud');
+    })
+    .then(data => {
+            if(data != 1)
+            {
+                document.getElementById("MensajeError").style.display = 'block';
+
+                document.cookie = "usuario=" + "";
+            }
+            else
+            {
+                document.cookie = "usuario=" + document.getElementById("username").value;
+                window.location.href = "libros.html";                
+            }
+    })
+    .catch(error => {
+        // Capturar y manejar cualquier error que ocurra durante la solicitud
+        console.error('Error de solicitud:', error);
+    });
+    }
 </script>
 
 </body>

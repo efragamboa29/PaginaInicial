@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<link rel="stylesheet" href="../css/estilos.css">
+<script src="../scripts/llenarLibros.js"></script>
+<script src="../scripts/autenticarUsuario.js"></script>
+<script>
+    ConsultarUsuarioExite();
+</script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<input type="button" value="Cerrar sesión" class="botoncerrar" onclick="cerrarsesion()">
+
+<title>Lista de Libros</title>
+</head>
+<body>
+  <h1>Lista de Libros</h1>
+  <br>
+    <label for="tnombre">Nombre</label>
+    <input type="text" class="tfiltro" id="tnombre">
+    <label for="tautor">Autor</label>
+    <input type="text" class="tfiltro" id="tautor">
+    <label for="tcategoria">categoria</label>
+    <input type="text" class="tfiltro" id="tcategoria">
+    <label for="tresumen">resumen</label>
+    <input type="text" class="tfiltro" id="tresumen"> 
+    <br>
+    <input type="button"  class="botoncerrar" value="filrar" id="bfiltor" onclick="consultarLibros()">
+    <br>   
+    <br>   
+  <table id="tablaDatos">
+    <thead>
+      <tr>
+        <th>Ver libro</th>
+        <th>Nombre</th>
+        <th>Autor</th>
+        <th>categoria</th>
+        <th>resumen</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</body>
+</html>

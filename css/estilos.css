@@ -27,3 +27,33 @@
     input[type="submit"]:hover {
         background-color: #45a049;
     }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid #258f3c;
+        text-align: left;
+        padding: 8px;
+      }
+      th {
+        background-color: #0e7e23;
+      }
+      .texto-rojo {
+        color: red;        
+      }
+
+      .texto-verde {
+        color: green;        
+      }
+
+      .botoncerrar {
+        background-color: #686f06;    
+        color: white;
+        align-content: end;
+      }
+
+      .tfiltro
+      {
+        width: 20% !important;
+      }
